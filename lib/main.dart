@@ -24,14 +24,24 @@ class MyApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Icon(
-                  Icons.lock,
-                  size: 100,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/guess_logo.png',
+                      width: 120.0,
+                      height: 120.0,
+                    ),
+                    Text(
+                      '      GUESS\nTHE NUMBER',
+                      style:
+                          TextStyle(fontSize: 35.0, color: Color(0xFF7CC406)),
+                    ),
+                  ],
                 ),
-                Text('กรุณาใส่รหัสผ่าน',style: TextStyle(fontSize: 50,),),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 150,
+                    top: 120,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -62,23 +72,28 @@ class MyApp extends StatelessWidget {
                   padding: const EdgeInsets.only(
                     left: 27,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      buildButton(0),
-                      Icon(
-                        Icons.backspace,
-                      ),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      right: 25,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        buildButton(-2),
+                        buildButton(0),
+                        buildButton(-1),
+                      ],
+                    ),
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextButton(onPressed: () {},
-                          child: Text('ลืมรหัสผ่าน'),
-                      )
-                    ],
+                  children: [
+                    TextButton(
+                      onPressed: () {},
+                      child: Text('ลืมรหัสผ่าน'),
+                    )
+                  ],
                 )
               ],
             ),
@@ -88,20 +103,31 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Widget buildButton(int num){
-   return Padding(
+  Widget buildButton(int num) {
+    Widget? child;
+    Function? onTapCallback=(){
+      print('$num');
+    };
+    if(num == -2){
+      onTapCallback = null;
+    }
+    else if (num == -1) {
+      child = Icon(Icons.backspace);
+    } else {
+      child = Text('$num');
+    }
+    return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Container(
-          width: 80.0,
-          height: 80.0,
+        width: 80.0,
+        height: 80.0,
         decoration: BoxDecoration(
-        color: Colors.yellow,
+          color: Colors.yellow,
           border: Border.all(color: Colors.red, width: 4.0),
-
-      ),
-        child: ElevatedButton(onPressed: () {}, child: Text('$num')),
+        ),
+        child: ElevatedButton(onPressed: () {},
+            child: child,)
       ),
     );
-
-  }
+}
 }
