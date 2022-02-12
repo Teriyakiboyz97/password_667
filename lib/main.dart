@@ -76,13 +76,17 @@ class MyApp extends StatelessWidget {
                     padding: const EdgeInsets.only(
                       right: 25,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        buildButton(-2),
-                        buildButton(0),
-                        buildButton(-1),
-                      ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        left: 127,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          buildButton(0),
+                          buildButton(-1),
+                        ],
+                      ),
                     ),
                   ),
                 ),
